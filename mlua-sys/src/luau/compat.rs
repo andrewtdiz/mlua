@@ -515,6 +515,11 @@ pub unsafe fn luaL_traceback(L: *mut lua_State, L1: *mut lua_State, msg: *const 
             if ar.currentline > 0 {
                 luaL_addunsigned(&mut buf, ar.currentline as _);
                 luaL_addstring(&mut buf, cstr!(":"));
+                let column = lua_getcolumn(L1, level);
+                if column > 0 {
+                    luaL_addunsigned(&mut buf, column as _);
+                    luaL_addstring(&mut buf, cstr!(":"));
+                }
             }
             luaL_addstring(&mut buf, cstr!(" in "));
             compat53_pushfuncname(L, L1, level, &mut ar);

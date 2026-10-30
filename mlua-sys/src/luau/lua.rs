@@ -542,6 +542,8 @@ unsafe extern "C-unwind" {
     pub fn lua_callhook(L: *mut lua_State, hook: lua_Hook, userdata: *mut c_void);
     pub fn lua_stackdepth(L: *mut lua_State) -> c_int;
     pub fn lua_getinfo(L: *mut lua_State, level: c_int, what: *const c_char, ar: *mut lua_Debug) -> c_int;
+    // ClayScript Luau fork: 1-based source column at `level`, or 0 when unknown
+    pub fn lua_getcolumn(L: *mut lua_State, level: c_int) -> c_int;
     pub fn lua_getargument(L: *mut lua_State, level: c_int, n: c_int) -> c_int;
     pub fn lua_getlocal(L: *mut lua_State, level: c_int, n: c_int) -> *const c_char;
     pub fn lua_setlocal(L: *mut lua_State, level: c_int, n: c_int) -> *const c_char;
